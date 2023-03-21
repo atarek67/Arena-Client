@@ -4,8 +4,8 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
 import { tokens } from "../../theme";
-import React, { useState, useEffect} from "react";
-import {useNavigate , Link} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Header from "../../Components/Header";
 import "../../Styles/Style.css";
@@ -13,18 +13,18 @@ const Game = () => {
   const navigate = useNavigate();
   const [games, setGames] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:7500/api/games').then((response) => {
+    axios.get('/games').then((response) => {
       console.log(response.data);
       setGames(response.data);
-  });
-},[]);
-const deleteGame = (id)=>{
-  axios.delete(`http://localhost:7500/api/games/delete/${id}`).then(
-    alert("The Game is Deleted Successfully !!")
-      )
-      navigate(`../admin/games`);
-      window.location.reload();
-}
+    });
+  }, []);
+  const deleteGame = (id) => {
+    axios.delete(`/games/delete/${id}`).then(
+      alert("The Game is Deleted Successfully !!")
+    )
+    navigate(`../admin/games`);
+    window.location.reload();
+  }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -60,34 +60,34 @@ const deleteGame = (id)=>{
           },
         }}
       >
-        
+
         <h3>Games</h3>
-          <table id="table">
-              <tr>
-                  <th>Reserver</th>
-                  <th>Field</th>
-                  <th>Date</th>
-                  <th>Hour</th>
-                  <th>Details</th>
-                  <th>Delete</th>
-              </tr>
-              {games&&games.map((g)=><tr key={g._id}>
-              <td>{<Link to={`/admin/playerDetails/${g.playerId}`}><IconButton> 
-                  <PermIdentityOutlinedIcon />
-                </IconButton></Link>}</td>
-                <td>{<Link to={`/admin/fieldDetails/${g.fieldId}`}><IconButton> 
-                  <SportsScoreOutlinedIcon />
-                </IconButton></Link>}</td>
-                {g.date&&<td>{g.date}</td>}
-                {g.hour&&<td>{g.hour}</td>}
-                <td>{<Link to={`/admin/gameDetails/${g._id}`}><IconButton> 
-                  <InfoOutlinedIcon />
-                </IconButton></Link>}</td>
-                <td>{<IconButton onClick={() => deleteGame(g._id)}> 
-                  <DeleteOutlinedIcon />
-                </IconButton>}</td>
-              </tr>)}
-          </table>
+        <table id="table">
+          <tr>
+            <th>Reserver</th>
+            <th>Field</th>
+            <th>Date</th>
+            <th>Hour</th>
+            <th>Details</th>
+            <th>Delete</th>
+          </tr>
+          {games && games.map((g) => <tr key={g._id}>
+            <td>{<Link to={`/admin/playerDetails/${g.playerId}`}><IconButton>
+              <PermIdentityOutlinedIcon />
+            </IconButton></Link>}</td>
+            <td>{<Link to={`/admin/fieldDetails/${g.fieldId}`}><IconButton>
+              <SportsScoreOutlinedIcon />
+            </IconButton></Link>}</td>
+            {g.date && <td>{g.date}</td>}
+            {g.hour && <td>{g.hour}</td>}
+            <td>{<Link to={`/admin/gameDetails/${g._id}`}><IconButton>
+              <InfoOutlinedIcon />
+            </IconButton></Link>}</td>
+            <td>{<IconButton onClick={() => deleteGame(g._id)}>
+              <DeleteOutlinedIcon />
+            </IconButton>}</td>
+          </tr>)}
+        </table>
       </Box>
     </Box>
   );

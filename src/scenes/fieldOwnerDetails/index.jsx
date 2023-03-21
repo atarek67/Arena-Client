@@ -1,6 +1,6 @@
 import { Box, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -10,28 +10,28 @@ import Header from "../../Components/Header";
 import "../../Styles/Style.css";
 import { ManageAccountsOutlined } from "@mui/icons-material";
 const FieldOwnerDetails = () => {
-  const image = "http://localhost:7500/api/images/fieldOwnerPic/";
+  const image = "/images/fieldOwnerPic/";
   const navigate = useNavigate();
-  let {fieldOwnerID}=useParams();
-  const [fieldOwner,setFieldOwner] = useState("");
+  let { fieldOwnerID } = useParams();
+  const [fieldOwner, setFieldOwner] = useState("");
   useEffect(() => {
-    axios.get(`http://localhost:7500/api/fieldOwners/${fieldOwnerID}`).then((response) => {
+    axios.get(`/fieldOwners/${fieldOwnerID}`).then((response) => {
       console.log(response.data);
       setFieldOwner(response.data);
-  });
-  },[fieldOwnerID]);
-  const deleteFieldOwner = (id)=>{
-    axios.delete(`http://localhost:7500/api/fieldOwners/delete/${id}`).then(
+    });
+  }, [fieldOwnerID]);
+  const deleteFieldOwner = (id) => {
+    axios.delete(`/fieldOwners/delete/${id}`).then(
       alert("The FieldOwner is Deleted Successfully !!")
-      )
-      navigate(`../admin/fieldOwners`);
+    )
+    navigate(`../admin/fieldOwners`);
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   return (
     <Box m="20px">
-      <Header title={`FieldOwner Name : ${fieldOwner.fullName}`}/>
+      <Header title={`FieldOwner Name : ${fieldOwner.fullName}`} />
       <Box
         m="40px 0 0 0"
         height="50vh"
@@ -61,33 +61,33 @@ const FieldOwnerDetails = () => {
           },
         }}
       >
-        <h3>{<Link to={`/admin/fieldOwners`}><IconButton title="Show All FieldOwners"> 
-            <ManageAccountsOutlined />
-          </IconButton></Link>} 
-          {<IconButton title="Delete FieldOwner" onClick={() => deleteFieldOwner(fieldOwner._id)}> 
+        <h3>{<Link to={`/admin/fieldOwners`}><IconButton title="Show All FieldOwners">
+          <ManageAccountsOutlined />
+        </IconButton></Link>}
+          {<IconButton title="Delete FieldOwner" onClick={() => deleteFieldOwner(fieldOwner._id)}>
             <DeleteOutlinedIcon />
-          </IconButton>} 
-          {<Link to={`/admin/updateFieldOwner/${fieldOwner._id}`}><IconButton title="Update FieldOwner"> 
+          </IconButton>}
+          {<Link to={`/admin/updateFieldOwner/${fieldOwner._id}`}><IconButton title="Update FieldOwner">
             <EditOutlinedIcon />
           </IconButton></Link>}
         </h3>
-          <table id="table">
-              <tr>
-                  <td colspan="2"><img className="PPimg" src={`${image}/${fieldOwner.image}`} alt="Profile Picture"></img></td>
-              </tr>
-              <tr>
-                  <th>Phone</th>
-                  {fieldOwner.phone&&<td>{fieldOwner.phone}</td>}
-              </tr>
-              <tr>
-                  <th>Email</th>
-                  {fieldOwner.email&&<td>{fieldOwner.email}</td>}
-              </tr>
-              <tr>
-                  <th>UserName</th>
-                  {fieldOwner.userName&&<td>{fieldOwner.userName}</td>}
-              </tr>
-          </table>
+        <table id="table">
+          <tr>
+            <td colspan="2"><img className="PPimg" src={`${image}/${fieldOwner.image}`} alt="Profile Picture"></img></td>
+          </tr>
+          <tr>
+            <th>Phone</th>
+            {fieldOwner.phone && <td>{fieldOwner.phone}</td>}
+          </tr>
+          <tr>
+            <th>Email</th>
+            {fieldOwner.email && <td>{fieldOwner.email}</td>}
+          </tr>
+          <tr>
+            <th>UserName</th>
+            {fieldOwner.userName && <td>{fieldOwner.userName}</td>}
+          </tr>
+        </table>
       </Box>
     </Box>
   );

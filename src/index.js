@@ -42,6 +42,9 @@ import Reviews from "./scenes/reviews/index";
 import ChangePassword from "./scenes/changePassword/index";
 import StripePayment from './Components/Stripe Payment/StripePayment';
 import { AdminLoader } from "./scenes/dashboard/index";
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://arena-server.onrender.com/api"
 
 
 

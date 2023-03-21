@@ -1,10 +1,10 @@
 import { Box, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from "../../Components/Header";
@@ -13,17 +13,17 @@ const Player = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:7500/api/players').then((response) => {
+    axios.get('/players').then((response) => {
       console.log(response.data);
       setPlayers(response.data);
-  });
-  },[]);
-  const deletePlayer = (id)=>{
-    axios.delete(`http://localhost:7500/api/players/delete/${id}`).then(
+    });
+  }, []);
+  const deletePlayer = (id) => {
+    axios.delete(`/players/delete/${id}`).then(
       alert("The Player is Deleted Successfully !!")
-      )
-      navigate(`../admin/players`);
-      window.location.reload();
+    )
+    navigate(`../admin/players`);
+    window.location.reload();
   }
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -60,32 +60,32 @@ const Player = () => {
           },
         }}
       >
-        
+
         <h3>Players</h3>
-          <table id="table">
-              <tr>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Details</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-              </tr>
-              {players&&players.map((p)=><tr key={p._id}>
-                {p.fullName&&<td>{p.fullName}</td>}
-                {p.phone&&<td>{p.phone}</td>}
-                {p.email&&<td>{p.email}</td>}
-                <td>{<Link to={`/admin/playerDetails/${p._id}`}><IconButton> 
-                  <InfoOutlinedIcon />
-                </IconButton></Link>}</td>
-                <td>{<Link to={`/admin/updatePlayer/${p._id}`}><IconButton> 
-                  <EditOutlinedIcon />
-                </IconButton></Link>}</td>
-                <td>{<IconButton onClick={() => deletePlayer(p._id)}> 
-                  <DeleteOutlinedIcon />
-                </IconButton>}</td>
-              </tr>)}
-          </table>
+        <table id="table">
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          {players && players.map((p) => <tr key={p._id}>
+            {p.fullName && <td>{p.fullName}</td>}
+            {p.phone && <td>{p.phone}</td>}
+            {p.email && <td>{p.email}</td>}
+            <td>{<Link to={`/admin/playerDetails/${p._id}`}><IconButton>
+              <InfoOutlinedIcon />
+            </IconButton></Link>}</td>
+            <td>{<Link to={`/admin/updatePlayer/${p._id}`}><IconButton>
+              <EditOutlinedIcon />
+            </IconButton></Link>}</td>
+            <td>{<IconButton onClick={() => deletePlayer(p._id)}>
+              <DeleteOutlinedIcon />
+            </IconButton>}</td>
+          </tr>)}
+        </table>
       </Box>
     </Box>
   );

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 const FieldReservations = () => {
   const [t, i18n] = useTranslation();
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
   const [index, setIndex] = useState(0);
 
 
@@ -20,7 +20,7 @@ const FieldReservations = () => {
   const { fieldID } = useParams();
   useEffect(() => {
     async function getField() {
-      let { data } = await axios.get(`http://localhost:7500/api/fields/${fieldID}`);
+      let { data } = await axios.get(`/fields/${fieldID}`);
       setField(data);
     }
     getField();
@@ -160,10 +160,10 @@ const FieldReservations = () => {
                     className="fa fa-map-marker text-success"
                     aria-hidden="true"
                   ></i>
-                <span className="card-subtitle m-2 h5 text-success">
-                  {t("Location on Map")}
+                  <span className="card-subtitle m-2 h5 text-success">
+                    {t("Location on Map")}
 
-                </span>
+                  </span>
                 </a>
               </div>
             </div>
@@ -222,7 +222,7 @@ export default FieldReservations;
 
 export async function FieldReservationsLoader({ params }) {
   let { data } = await axios.get(
-    `http://localhost:7500/api/games/field/${params.fieldID}`
+    `/games/field/${params.fieldID}`
   );
   return data;
 }

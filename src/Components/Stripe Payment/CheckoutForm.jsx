@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 
 const CheckoutForm = () => {
-  const[t,i18n]=useTranslation();
+  const [t, i18n] = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   let gameToken = localStorage.getItem("game");
@@ -49,7 +49,7 @@ const CheckoutForm = () => {
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       // Create Order Here
       await axios
-        .post(`http://localhost:7500/api/games/add`, gameData)
+        .post(`/games/add`, gameData)
         .catch((e) => {
           console.log(e);
         });

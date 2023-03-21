@@ -17,7 +17,7 @@ import axios from 'axios';
 
 export default function MainProfile() {
   const [t, i18n] = useTranslation();
-  const image = "http://localhost:7500/api/images/playerPic/";
+  const image = "/images/playerPic/";
   let [PlayerUpdateFormIsVisible, setPlayerUpdateFormIsVisible] = useState(false)
   let playerToken = localStorage.getItem("userToken");
   let playerData = jwtDecode(playerToken);
@@ -31,7 +31,7 @@ export default function MainProfile() {
     const formData = new FormData();
     formData.append('image', e.target.files[0])
     //   console.log(formData)
-    await axios.post(`http://localhost:7500/api/players/updatePlayerImage/${playerData.userID}`, formData, {
+    await axios.post(`/players/updatePlayerImage/${playerData.userID}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

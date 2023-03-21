@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 var key = true;
 const StripePayment = () => {
-  const[t,i18n]=useTranslation();
+  const [t, i18n] = useTranslation();
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
 
@@ -34,7 +34,7 @@ const StripePayment = () => {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:7500/api/payment",
+        "/payment",
         { total: +gameData.price },
         {
           headers: {

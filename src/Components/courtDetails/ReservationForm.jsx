@@ -35,10 +35,10 @@ const ReservationForm = ({ fieldId, fieldName, price }) => {
   useEffect(() => {
     async function getData() {
       let myData = await axios.get(
-        `http://localhost:7500/api/games/field/${fieldId}`
+        `/games/field/${fieldId}`
       );
       let field = await axios.get(
-        `http://localhost:7500/api/fields/calender/${fieldId}`
+        `/fields/calender/${fieldId}`
       );
       setField(field);
       setData(myData);
@@ -99,7 +99,7 @@ const ReservationForm = ({ fieldId, fieldName, price }) => {
     console.log(game);
     if (result.error == null) {
       // await axios
-      //   .post(`http://localhost:7500/api/games/add`, gamee)
+      //   .post(`/games/add`, gamee)
       //   .catch((e) => {
       //     console.log(e);
       //   });
@@ -116,7 +116,7 @@ const ReservationForm = ({ fieldId, fieldName, price }) => {
         navigate(`/payment/`);
       } else {
         await axios
-          .post(`http://localhost:7500/api/games/add`, gamee)
+          .post(`/games/add`, gamee)
           .catch((e) => {
             console.log(e);
 

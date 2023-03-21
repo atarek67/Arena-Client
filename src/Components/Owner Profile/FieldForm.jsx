@@ -62,7 +62,7 @@ const FieldForm = ({ setFormIsVisible }) => {
     if (result.error == null) {
       //TODO check url
       console.log(formData)
-      await axios.post(`http://localhost:7500/api/fields/add`, formData, {
+      await axios.post(`/fields/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
@@ -200,8 +200,8 @@ const FieldForm = ({ setFormIsVisible }) => {
               className="btn btn-outline-success"
               type="submit"
               value={t("Add Field")}
-              
-              
+
+
             />
           </div>
         </form>

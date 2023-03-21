@@ -10,7 +10,7 @@ const ConfirmEmail = () => {
   const { userID } = useParams();
   console.log(userID);
   useEffect(() => {
-    axios.patch(`http://localhost:7500/api/users/changeStatus/${userID}`);
+    axios.patch(`/users/changeStatus/${userID}`);
   }, []);
   useEffect(() => {
     setTimeout(() => {

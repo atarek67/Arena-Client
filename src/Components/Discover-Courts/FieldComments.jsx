@@ -11,7 +11,7 @@ const FieldComments = ({ fieldId }) => {
   useEffect(() => {
     async function getGames() {
       let { data } = await axios.get(
-        `http://localhost:7500/api/games/field/${fieldId}`
+        `/games/field/${fieldId}`
       );
       setGames(data);
     }
@@ -61,14 +61,14 @@ const FieldComments = ({ fieldId }) => {
                     </div>
                   </div>
                 </div> :
-""
-                // <span className="h4 text-center text-warning">There is no reviews yet</span>
-                ))}
-                {booleanValue.length === 0 && 
-                <>
+                ""
+              // <span className="h4 text-center text-warning">There is no reviews yet</span>
+            ))}
+            {booleanValue.length === 0 &&
+              <>
                 <span className="h3 text-center text-success">There is no reviews yet</span>
-                </>
-                }
+              </>
+            }
           </div>
         </div>
       </section>

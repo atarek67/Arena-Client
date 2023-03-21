@@ -39,7 +39,7 @@ export default function Login(props) {
   async function formSubmit(e) {
     e.preventDefault();
     let { data, error, body } = await axios
-      .post(`http://localhost:7500/api/users/login`, user)
+      .post(`/users/login`, user)
       .catch((err) => {
         setShowError(true);
       });

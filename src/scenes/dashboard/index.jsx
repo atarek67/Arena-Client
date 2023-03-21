@@ -20,17 +20,17 @@ const Dashboard = () => {
   useEffect(() => {
     async function GetData() {
       await axios
-        .get(`http://localhost:7500/api/fields`)
+        .get(`/fields`)
         .then(async (fields) => {
           console.log(fields.data);
           setFields(fields.data);
           await axios
-            .get(`http://localhost:7500/api/players`)
+            .get(`/players`)
             .then(async (players) => {
               console.log(players.data);
               setPlayers(players.data);
               await axios
-                .get(`http://localhost:7500/api/games`)
+                .get(`/games`)
                 .then((games) => {
                   console.log(games.data);
                   setGames(games.data);
@@ -126,7 +126,7 @@ const Dashboard = () => {
           </Box>
           {console.log(games)}
           {games?.map((game) => (
-            game.price != "0"&&<Box
+            game.price != "0" && <Box
               key={game._id}
               display="flex"
               justifyContent="space-around"
@@ -170,6 +170,6 @@ export function AdminLoader() {
     if (ownerData.role === "Admin") {
       return null;
     } else return redirect("/");
-  } 
+  }
   else return redirect("/login");
 }

@@ -6,7 +6,7 @@ import axios from "axios";
 import { useTranslation } from 'react-i18next';
 
 const UpdateForm = ({ setUpdateFormIsVisible }) => {
-  const [t,i18n]=useTranslation();
+  const [t, i18n] = useTranslation();
 
   //TODO need to send the fieldOwner ID
   let OwnerToken = localStorage.getItem("userToken");
@@ -17,7 +17,7 @@ const UpdateForm = ({ setUpdateFormIsVisible }) => {
     fullName: ownerData.fullName,
     phone: ownerData.phone,
     userName: ownerData.userName,
-    image:ownerData.image
+    image: ownerData.image
   });
 
   const [showError, setShowError] = useState(false);
@@ -30,7 +30,7 @@ const UpdateForm = ({ setUpdateFormIsVisible }) => {
     email: Joi.string()
       .email({ tlds: { allow: ["com", "net", "org", "eg"] } })
       .required(),
-      image:Joi
+    image: Joi
   };
 
   async function formSubmit(e) {
@@ -39,7 +39,7 @@ const UpdateForm = ({ setUpdateFormIsVisible }) => {
     let result = Joi.validate(user, userSchema, { abortEarly: false });
     if (result.error === null) {
       //TODO check url
-      await axios.patch(`http://localhost:7500/api/fieldOwners/update/${ownerData.userID}`, user);
+      await axios.patch(`/fieldOwners/update/${ownerData.userID}`, user);
       alert("Updated succussfully");
 
       let myUser = user;
@@ -47,12 +47,12 @@ const UpdateForm = ({ setUpdateFormIsVisible }) => {
       myUser.role = "fieldOwner";
       myUser.status = "Active";
       myUser.userID = ownerData.userID;
-      
+
       const secret = 'secret-Arena-Very-6767';
       const jwt = sign(myUser, secret);
 
 
-      localStorage.setItem("userToken" , jwt);
+      localStorage.setItem("userToken", jwt);
       window.location.reload();
 
       setUpdateFormIsVisible(false);

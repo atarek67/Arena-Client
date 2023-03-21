@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 const UpdateFieldForm = ({ fieldToUpdate, setShowUpdateForm, setFieldToUpdate, setCounterToUpdate }) => {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
   const [t, i18n] = useTranslation();
 
   let OwnerToken = localStorage.getItem("userToken");
@@ -38,7 +38,7 @@ const UpdateFieldForm = ({ fieldToUpdate, setShowUpdateForm, setFieldToUpdate, s
     if (result.error == null) {
       //TODO check url
 
-      await axios.patch(`http://localhost:7500/api/fields/update/${fieldId}
+      await axios.patch(`/fields/update/${fieldId}
 `, fieldToUpdate);
       alert("Added succussfully");
       //  navigate("/my-fields");
@@ -70,7 +70,7 @@ const UpdateFieldForm = ({ fieldToUpdate, setShowUpdateForm, setFieldToUpdate, s
   ///////////del/////////////
 
   const deleteImage = async (_id, i) => {
-    await axios.delete(`http://localhost:7500/api/fields/deleteFieldImage/${_id}/${i}`).then(alert("deleted ya 3m"))
+    await axios.delete(`/fields/deleteFieldImage/${_id}/${i}`).then(alert("deleted ya 3m"))
     window.location.reload();
   }
   ////////////Add/////////////
@@ -80,7 +80,7 @@ const UpdateFieldForm = ({ fieldToUpdate, setShowUpdateForm, setFieldToUpdate, s
       formData.append('image', e.target.files[i]);
     }
 
-    axios.post(`http://localhost:7500/api/fields/addFieldImages/${fieldId}`, formData, {
+    axios.post(`/fields/addFieldImages/${fieldId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

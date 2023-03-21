@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
 const ForgotPassword = () => {
-  const [t,i18n   ]=useTranslation();
+  const [t, i18n] = useTranslation();
   let [user, setUser] = useState({
     email: "",
   });
@@ -21,8 +21,8 @@ const ForgotPassword = () => {
     //   };
     //   setUser(userWithEmail);
     // } else {
-      let myUser = { ...user };
-      myUser[e.target.name] = e.target.value;
+    let myUser = { ...user };
+    myUser[e.target.name] = e.target.value;
     setUser(e.target.value);
     console.log(user)
     // }
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     console.log(user);
     await axios.post(
-      `http://localhost:7500/api/users/sendEmailToChangePassword/${user}`,
+      `/users/sendEmailToChangePassword/${user}`,
       user
     );
     setShowMessage(true);

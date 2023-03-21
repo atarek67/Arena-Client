@@ -21,7 +21,10 @@ import { useTranslation } from 'react-i18next';
 
 //TODO need to check if the field is validated by admin
 export default function DiscoverCourts() {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "https://arena-server.onrender.com/api/images/fieldPic/";
+  // const image = "/images/fieldPic/";
+  // https://arena-server.onrender.com/images/fieldPic/
+
   const [t, i18n] = useTranslation();
   let fields = useLoaderData();
   console.log(fields);
@@ -65,7 +68,7 @@ export default function DiscoverCourts() {
   ////////////////////////
   return (
     <div className={style.MDBContainer}>
-      
+
       {/* <div className="container d-flex align-items-center justify-content-center"> */}
       <div className="container col-lg-4 d-flex justify-content-center align-items-center text-center d-flex p-2">
         <MDBContainer fluid>
@@ -93,12 +96,12 @@ export default function DiscoverCourts() {
 
 
       <MDBContainer className="my-5 ">
-      {showComments && (
-        <Modal setShowComments={setShowComments}>
-          {/* medhat */}
-          <FieldComments fieldId={fieldId}></FieldComments>
-        </Modal>
-      )}
+        {showComments && (
+          <Modal setShowComments={setShowComments}>
+            {/* medhat */}
+            <FieldComments fieldId={fieldId}></FieldComments>
+          </Modal>
+        )}
         <MDBRow>
           {filteredResults.length == 0 && (
             <h3 className="text-danger text-center">{t("No fields found!")}</h3>
@@ -117,7 +120,7 @@ export default function DiscoverCourts() {
                         className="p-4 cardImage"
                         src={`${image}/${f.images[0]}`}
                         position="top"
-                       
+
                       />
                       <MDBCardBody>
                         <div className="d-flex justify-content-between text-center">
@@ -194,7 +197,7 @@ export default function DiscoverCourts() {
                           // src="https://www.weareimps.com/siteassets/club/3g-header.jpg/Large"
                           src={`${image}/${f.images[0]}`}
                           position="top"
-                         
+
                         />
                         <MDBCardBody>
                           <div className=" text-center">
@@ -259,6 +262,6 @@ export default function DiscoverCourts() {
 }
 
 export async function discoverFieldsLoader() {
-  let { data } = await axios.get(`http://localhost:7500/api/fields`);
+  let { data } = await axios.get(`/fields`);
   return data;
 }

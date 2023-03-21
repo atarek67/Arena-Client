@@ -1,6 +1,6 @@
 import { Box, useTheme, IconButton } from "@mui/material";
 import { tokens } from "../../theme";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -9,17 +9,17 @@ import "../../Styles/Style.css";
 const Reviews = () => {
   const [games, setGames] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:7500/api/games').then((response) => {
+    axios.get('/games').then((response) => {
       console.log(response.data);
       setGames(response.data);
-  });
-  },[]);
+    });
+  }, []);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   return (
     <Box m="20px">
-      <Header title="Complains"/>
+      <Header title="Complains" />
       <Box
         m="40px 0 0 0"
         height="50vh"
@@ -50,22 +50,22 @@ const Reviews = () => {
         }}
       >
 
-          <table id="table">
-              <tr>
-                  <th>Review</th>
-                  <th>Reviewed By</th>
-                  <th>Field Name</th>
-                  <th>Field Details</th>
-              </tr>
-              {games&&games.map((g)=>(g.price !== "0" && g.comment)&&<tr key={g._id}>
-                {g.comment&&<td>{g.comment}</td>}
-                {g.userFullName&&<td>{g.userFullName}</td>}
-                {g.fieldName&&<td>{g.fieldName}</td>}
-                <td>{<Link to={`/admin/fieldDetails/${g.fieldId}`}><IconButton> 
-                  <InfoOutlinedIcon />
-                </IconButton></Link>}</td>
-              </tr>)}
-          </table>
+        <table id="table">
+          <tr>
+            <th>Review</th>
+            <th>Reviewed By</th>
+            <th>Field Name</th>
+            <th>Field Details</th>
+          </tr>
+          {games && games.map((g) => (g.price !== "0" && g.comment) && <tr key={g._id}>
+            {g.comment && <td>{g.comment}</td>}
+            {g.userFullName && <td>{g.userFullName}</td>}
+            {g.fieldName && <td>{g.fieldName}</td>}
+            <td>{<Link to={`/admin/fieldDetails/${g.fieldId}`}><IconButton>
+              <InfoOutlinedIcon />
+            </IconButton></Link>}</td>
+          </tr>)}
+        </table>
       </Box>
     </Box>
   );

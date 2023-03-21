@@ -53,7 +53,7 @@ const RegistrationValidation = () => {
   var response;
   async function formSubmit(e) {
 
-    response = await axios.post(`http://localhost:7500/api/players/add`, user).catch((e) => {
+    response = await axios.post(`/players/add`, user).catch((e) => {
       console.log(e.response.data);
       console.log("aystring");
       if (e.response.data == "username or email already taken") {

@@ -18,7 +18,7 @@ import UpdateFieldForm from "./UpdateFieldForm";
 import { useTranslation } from 'react-i18next';
 
 export default function MyFields() {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
 
   const [t, i18n] = useTranslation();
 
@@ -34,7 +34,7 @@ export default function MyFields() {
   useEffect(() => {
     async function getFieldsData() {
       let { data } = await axios.get(
-        `http://localhost:7500/api/fields/fieldOwner/${ownerData.userID}`
+        `/fields/fieldOwner/${ownerData.userID}`
       );
       console.log(data);
       setFieldData(data);
@@ -161,7 +161,7 @@ export default function MyFields() {
 
                                   async function deleteField() {
                                     let res = await axios.delete(
-                                      `http://localhost:7500/api/fields/delete/${f._id}`
+                                      `/fields/delete/${f._id}`
                                     );
                                     console.log(res)
                                   }

@@ -20,7 +20,7 @@ const PlayerUpdateForm = ({ setUpdateFormIsVisible }) => {
     role: ownerData.role,
     userID: ownerData.userID,
     userName: ownerData.userName,
-    image:ownerData.image
+    image: ownerData.image
 
   });
 
@@ -38,7 +38,7 @@ const PlayerUpdateForm = ({ setUpdateFormIsVisible }) => {
       .required(),
     role: Joi.string().required(),
     userID: Joi.required(),
-    image:Joi
+    image: Joi
   };
 
   async function formSubmit(e) {
@@ -49,7 +49,7 @@ const PlayerUpdateForm = ({ setUpdateFormIsVisible }) => {
     if (result.error === null) {
       //TODO check url
 
-      await axios.patch(`http://localhost:7500/api/players/update/${ownerData.userID}`, user);
+      await axios.patch(`/players/update/${ownerData.userID}`, user);
       alert("Updated succussfully");
 
       let myUser = user;
@@ -71,7 +71,7 @@ const PlayerUpdateForm = ({ setUpdateFormIsVisible }) => {
     myUser[name] = value;
     setUser(myUser);
   }
-  const [t,i18n]=useTranslation();
+  const [t, i18n] = useTranslation();
 
   return (
     <div>

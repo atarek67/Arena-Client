@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
 const ResetPassword = () => {
-  const [t,i18n   ]=useTranslation();
+  const [t, i18n] = useTranslation();
   let [user, setUser] = useState({
     userName: "",
     password: "",
@@ -25,16 +25,16 @@ const ResetPassword = () => {
   //   }
   // }
   function inputHandler(e) {
-  
+
     let myUser = { ...user };
     myUser[e.target.name] = e.target.value;
     setUser(myUser);
-console.log(user);  
-}
+    console.log(user);
+  }
   async function formSubmit(e) {
     e.preventDefault();
     await axios.patch(
-      `http://localhost:7500/api/users/resetPassword/${user.email}`,
+      `/users/resetPassword/${user.email}`,
       { password: user.password }
     ).catch((e) => console.log(e));
     navigate("/login");

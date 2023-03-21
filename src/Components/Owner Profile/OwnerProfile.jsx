@@ -25,7 +25,7 @@ const OwnerProfile = () => {
   const [formIsVisible, setFormIsVisible] = useState(false);
   const [updateFormIsVisible, setUpdateFormIsVisible] = useState(false);
   const [userInfo, setuserInfo] = useState()
-  const image = "http://localhost:7500/api/images/fieldOwnerPic/";
+  const image = "/images/fieldOwnerPic/";
 
   function addField() {
     setFormIsVisible(true);
@@ -40,7 +40,7 @@ const OwnerProfile = () => {
   useEffect(() => {
     async function getUserInfo() {
 
-      let { data } = await axios.get(`http://localhost:7500/api/fieldOwners/${ownerData.userID}`);
+      let { data } = await axios.get(`/fieldOwners/${ownerData.userID}`);
       setuserInfo(data)
 
     }
@@ -52,7 +52,7 @@ const OwnerProfile = () => {
     const formData = new FormData();
     formData.append('image', e.target.files[0])
 
-    axios.post(`http://localhost:7500/api/fieldOwners/updateFieldOwnerImage/${ownerData.userID}`, formData, {
+    axios.post(`/fieldOwners/updateFieldOwnerImage/${ownerData.userID}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

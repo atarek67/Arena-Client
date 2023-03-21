@@ -14,7 +14,7 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function LastGames() {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
   // console.log(image)
   const [myGames, setMyGames] = useState([]);
   const [fields, setFields] = useState([]);
@@ -46,7 +46,7 @@ export default function LastGames() {
               //medhat
               async function updateComment() {
                 await axios.patch(
-                  `http://localhost:7500/api/games/update/${game._id}`,
+                  `/games/update/${game._id}`,
                   {
                     comment: comment,
                   }
@@ -68,7 +68,7 @@ export default function LastGames() {
 
   useEffect(() => {
     async function getGames() {
-      let { data } = await axios.get(`http://localhost:7500/api/fields`);
+      let { data } = await axios.get(`/fields`);
       setFields(data);
     }
     getGames();
@@ -85,7 +85,7 @@ export default function LastGames() {
 
     console.log("Gwa el patch ****");
     await axios
-      .patch(`http://localhost:7500/api/games/update/${myGames[0]._id}`, {
+      .patch(`/games/update/${myGames[0]._id}`, {
         comment: "Here Is an update in axios patch aaaa",
       })
       .catch((e) => {
@@ -101,7 +101,7 @@ export default function LastGames() {
       //TODO change url with this url to get finished games only
       let { data } = await axios
         .get(
-          `http://localhost:7500/api/games/user/previousGames/${playerData.userID}`
+          `/games/user/previousGames/${playerData.userID}`
         )
         .catch((e) => {
           console.log(e);
@@ -138,7 +138,7 @@ export default function LastGames() {
                     className="p-4 img-fluid cardImage"
                     src={`${image}/${game?.fieldImages[0]}`}
                     position="top"
-                   
+
                   />
                 </> : <><span>No image here</span></>}
 
@@ -170,7 +170,7 @@ export default function LastGames() {
                           //medhat
                           async function updateRate() {
                             await axios.patch(
-                              `http://localhost:7500/api/games/update/${game._id}`,
+                              `/games/update/${game._id}`,
                               {
                                 rate: e.target.value,
                               }
@@ -201,7 +201,7 @@ export default function LastGames() {
                         //medhat
                         async function updateComment() {
                           await axios.patch(
-                            `http://localhost:7500/api/games/update/${game._id}`,
+                            `/games/update/${game._id}`,
                             {
                               comment: comment,
                             }

@@ -7,7 +7,7 @@ import ReservationForm from "./ReservationForm";
 import Carousel from "react-bootstrap/Carousel";
 import { useTranslation } from 'react-i18next';
 export default function CourtDetails() {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
   const [t, i18n] = useTranslation();
   let field = useLoaderData();
   const [index, setIndex] = useState(0);
@@ -15,6 +15,8 @@ export default function CourtDetails() {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+  const api_url = "/fields"
 
 
   return (
@@ -49,7 +51,7 @@ export default function CourtDetails() {
 
 export async function courtLoader({ params }) {
   let { data } = await axios.get(
-    `http://localhost:7500/api/fields/${params.fieldID}`
+    `fields/${params.fieldID}`
   );
 
   return data;

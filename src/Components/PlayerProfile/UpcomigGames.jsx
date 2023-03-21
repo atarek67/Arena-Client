@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function UpcomingGames() {
-  const image = "http://localhost:7500/api/images/fieldPic/";
+  const image = "/images/fieldPic/";
   const [upcoming, setupcoming] = useState([]);
 
   const [counterToUpdate, setCounterToUpdate] = useState(0);
@@ -35,7 +35,7 @@ export default function UpcomingGames() {
       // TODO change url with this url to get prev games only
 
       let { data } = await axios.get(
-        `http://localhost:7500/api/games/user/nextGames/${playerData.userID}`);
+        `/games/user/nextGames/${playerData.userID}`);
       console.log(data);
       setupcoming(data);
 
@@ -74,7 +74,7 @@ export default function UpcomingGames() {
                     className="p-4 img-fluid"
                     src={`${image}/${u?.fieldImages[0]}`}
                     position="top"
-                   
+
                   />
                 </> : <><span>No image here</span></>}
                 <MDBCardBody>
@@ -107,7 +107,7 @@ export default function UpcomingGames() {
                               if (u.date > MyDateString) {
                                 async function deleteGame() {
                                   await axios.delete(
-                                    `http://localhost:7500/api/games/delete/${u._id}`
+                                    `/games/delete/${u._id}`
                                   );
                                 }
                                 deleteGame()
@@ -120,7 +120,7 @@ export default function UpcomingGames() {
                                 if (u.hour > hour + 6) {
                                   async function deleteGame() {
                                     await axios.delete(
-                                      `http://localhost:7500/api/games/delete/${u._id}`
+                                      `/games/delete/${u._id}`
                                     );
                                   }
                                   deleteGame();
